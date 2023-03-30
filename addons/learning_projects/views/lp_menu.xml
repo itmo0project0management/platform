@@ -1,0 +1,50 @@
+<?xml version="1.0"?>
+<odoo noupdate="0">
+    <data>
+        <menuitem id="lp_menu" name="Learning Projects"/>
+
+        <!-- Participants -->
+        <act_window id="action_res_partner"
+                    name="Participants"
+                    res_model="res.partner"
+                    view_mode="tree,form"/>
+
+        <menuitem id="menuitem_partner"
+                  name="Participants"
+                  action="action_res_partner"
+                  parent="lp_menu"
+                  sequence="0"/>
+
+        <!-- Projects -->
+        <act_window id="action_project_project"
+                    name="Projects"
+                    res_model="project.project"
+                    view_mode="kanban,tree,form"/>
+
+        <menuitem id="menuitem_project_project"
+                  name="Projects"
+                  action="action_project_project"
+                  parent="lp_menu"
+                  sequence="1"/>
+
+        <!-- Projects action_lp_project_management -->
+        <menuitem id="menuitem_lp_project"
+                name="Projects Management"
+                action="action_nocontent_lp_project_management"
+                parent="lp_menu"
+                sequence="2"/>
+
+        <menuitem id="menuitem_lp_resume"
+                name="Resume"
+                action="action_nocontent_lp_resume"
+                parent="lp_menu"
+                sequence="3"/>
+
+        <menuitem id="menuitem_lp_invitation_bachelor"
+                name="lp_invitation_bachelor"
+                action="action_nocontent_lp_invitation_bachelor"
+                parent="lp_menu"
+                sequence="4"/>
+
+    </data>
+</odoo>
