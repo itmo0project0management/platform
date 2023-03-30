@@ -23,6 +23,6 @@ jobs:
         username: ${{ secrets.SSH_USERNAME }}
         password: ${{ secrets.SSH_PASSWORD }}
         script: |
-          cd /path/to/your/project
-          docker-compose pull
-          docker-compose up -d
+          cd /home/platform
+          docker compose pull
+          docker compose up -d
