@@ -24,5 +24,6 @@ jobs:
         password: ${{ secrets.SSH_PASSWORD }}
         script: |
           cd /home/platform
-          docker compose pull
-          docker compose up -d
+          git pull origin master
+          docker compose -f docker-compose.prod.yml down
+          docker compose -f docker-compose.prod.yml up -d

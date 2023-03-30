@@ -1,0 +1,48 @@
+version: "3.6"
+services:
+
+  odoo:
+    image: odoo:16.0
+    container_name: odoo
+    restart: always
+    volumes:
+      - ./data/odoo:/var/lib/odoo:Z
+      - ./config/odoo.conf:/etc/odoo/odoo.conf
+      - ./addons:/mnt/extra-addons
+    command: -u rent_management -d odoo
+
+  postgres:
+    image: postgres:13
+    container_name: postgres
+    restart: always
+    environment:
+      POSTGRES_DB: "postgres"
+      POSTGRES_USER: "odoo"
+      POSTGRES_PASSWORD: "WLgxqy4gy94HrJB6LSma"
+      PGDATA: "/var/lib/postgresql/data/pgdata"
+    volumes:
+      - ./data/pgdata:/var/lib/postgresql/data/pgdata
+
+  pgadmin:
+    image: dpage/pgadmin4:6.4
+    container_name: pgadmin
+    restart: always
+    environment:
+      PGADMIN_DEFAULT_EMAIL: "pgadmin@email.com"
+      PGADMIN_DEFAULT_PASSWORD: "GQb7FcAQw2hhpeLfXerL"
+      PGADMIN_SERVER_JSON_FILE: "/pgadmin4/servers.json"
+    volumes:
+      - ./config/pgadmin-servers.${ENVIRONMENT}.json:/pgadmin4/servers.json
+
+  maildev:
+    restart: always
+    container_name: maildev
+    image: maildev/maildev:latest
+    environment:
+      MAILDEV_MAIL_DIRECTORY: "/var/local"
+    volumes:
+      - ./data/maildev:/var/local
+
+networks:
+  default:
+    name: lp_network
