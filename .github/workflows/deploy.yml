@@ -14,17 +14,14 @@ jobs:
       with:
         username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_PASSWORD }}
-    - name: Build and push Docker images
-      run: |
-        docker-compose -f docker-compose.prod.yml build
-        docker-compose -f docker-compose.prod.yml push
 
-#    - name: Build and push Docker images
-#      uses: docker/push-action@v2
-#      with:
-#        context: .
-#        push: true
-#        tags: ${{ secrets.DOCKER_USERNAME }}/platform:latest
+    - name: Build and push Docker images
+      uses: docker/build-push-action@v2
+      with:
+        context: .
+        file: ./docker-compose.prod.yml
+        push: true
+        tags: latest
 
     - name: Deploy to server
       uses: appleboy/ssh-action@master
