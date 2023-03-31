@@ -40,8 +40,9 @@ jobs:
           set -a
           source ./envs/"${ENVIRONMENT}".env
           cd /home
-          gh repo clone itmo0project0management/platform
+          #gh repo clone itmo0project0management/platform
           cd platform/
+          git pull master
           docker compose -f docker-compose.prod.yml pull
           docker compose -f docker-compose.prod.yml down
           docker compose -f docker-compose.prod.yml up -d
