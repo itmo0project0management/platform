@@ -7,7 +7,7 @@ services:
     restart: always
     volumes:
       - ./data/odoo:/var/lib/odoo:Z
-      - ./config/odoo.conf:/etc/odoo/odoo.conf
+      - ./config/odoo.${ENVIRONMENT}.conf:/etc/odoo/odoo.conf
       - ./addons:/mnt/extra-addons
     command: -u rent_management -d odoo
 
