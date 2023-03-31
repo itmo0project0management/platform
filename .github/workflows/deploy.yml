@@ -37,7 +37,11 @@ jobs:
         username: ${{ secrets.SSH_USERNAME }}
         password: ${{ secrets.SSH_PASSWORD }}
         script: |
-          cd /home/platform
-          docker login -u ${{ secrets.DOCKER_USERNAME }} -P secrets.DOCKER_PASSWORD
+          set -a
+          source ./envs/"${ENVIRONMENT}".env
+          cd /home
+          gh repo clone itmo0project0management/platform
+          cd platform/
+          docker compose -f docker-compose.prod.yml pull
           docker compose -f docker-compose.prod.yml down
           docker compose -f docker-compose.prod.yml up -d
