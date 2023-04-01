@@ -53,7 +53,7 @@
                   parent="lp_menu"
                   sequence="2" groups="learning_projects.lp_group_lecturer"/>
 
-        <menuitem id="menuitem_lp_invitation_bachelor"
+        <menuitem id="menuitem_lp_invitation_lecturer"
                   name="Отправленные приглашения"
                   action="action_nocontent_lp_invitation_bachelor"
                   parent="lp_menu"

@@ -42,7 +42,8 @@ jobs:
           cd /home
           #gh repo clone itmo0project0management/platform
           cd platform/
-          git pull master
+          git pull
+          #git pull master
           #docker compose -f docker-compose.prod.yml pull
           #docker compose -f docker-compose.prod.yml down
           #docker compose -f docker-compose.prod.yml up -d
