@@ -86,3 +86,10 @@ class InvitationBachelor(models.Model):
         invitation = self.env['lp.invitation.bachelor'].search([('resume_author', '=', resume_author), ('id', '!=', self.id)], limit=1)
         if invitation is not None:
             invitation.write({'invited_status': 'invited_for_other_priority'})
+
+
+    def name_get(self):
+        result = []
+        for record in self:
+            result.append((record['id'], record.resume.name))
+        return result

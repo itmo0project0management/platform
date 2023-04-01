@@ -27,56 +27,43 @@
                   parent="lp_menu"
                   sequence="1"/>-->
 
-        <!-- Projects action_lp_project_management -->
-        <menuitem id="menuitem_lp_project_master"
-                name="Projects Management"
-                action="action_nocontent_lp_project_management"
-                parent="lp_menu"
-                sequence="1" groups="learning_projects.lp_group_master"/>
-
-        <menuitem id="menuitem_lp_resume_master"
-                name="Resume"
-                action="action_nocontent_lp_resume"
-                parent="lp_menu"
-                sequence="2" groups="learning_projects.lp_group_master"/>
-
-        <!-- Lecturer -->
-        <menuitem id="menuitem_lp_project_lecturer"
-                  name="Projects Management"
-                  action="action_nocontent_lp_project_management"
-                  parent="lp_menu"
-                  sequence="1" groups="learning_projects.lp_group_lecturer"/>
-
-        <menuitem id="menuitem_lp_resume_lecturer"
-                  name="Resume"
-                  action="action_nocontent_lp_resume"
-                  parent="lp_menu"
-                  sequence="2" groups="learning_projects.lp_group_lecturer"/>
-
-        <menuitem id="menuitem_lp_invitation_lecturer"
-                  name="Отправленные приглашения"
-                  action="action_nocontent_lp_invitation_bachelor"
-                  parent="lp_menu"
-                  sequence="3" groups="learning_projects.lp_group_lecturer"/>
-
-        <!-- Projects lp_group_bachelor -->
-        <menuitem id="menuitem_lp_resume_bacalor"
-                  name="Резюме"
-                  action="action_nocontent_lp_resume"
-                  parent="lp_menu"
-                  sequence="1" groups="learning_projects.lp_group_bachelor"/>
-
-        <menuitem id="menuitem_lp_project_bacalor"
+        <!-- Lecturer and Master-->
+        <menuitem id="menuitem_lp_project_lecturer_master"
                   name="Проекты"
                   action="action_nocontent_lp_project_management"
                   parent="lp_menu"
-                  sequence="2" groups="learning_projects.lp_group_bachelor"/>
+                  sequence="0" groups="learning_projects.lp_group_lecturer,learning_projects.lp_group_master"/>
+
+        <menuitem id="menuitem_lp_resume_lecture_master"
+                  name="Резюме"
+                  action="action_nocontent_lp_resume"
+                  parent="lp_menu"
+                  sequence="1" groups="learning_projects.lp_group_lecturer,learning_projects.lp_group_master"/>
+
+        <menuitem id="menuitem_lp_invitation_lecturer_master"
+                  name="Отклики в проекты"
+                  action="action_nocontent_lp_invitation_bachelor"
+                  parent="lp_menu"
+                  sequence="2" groups="learning_projects.lp_group_lecturer,learning_projects.lp_group_master"/>
+
+        <!-- Projects lp_group_bachelor -->
+        <menuitem id="menuitem_lp_resume_bachelor"
+                  name="Резюме"
+                  action="action_nocontent_lp_resume"
+                  parent="lp_menu"
+                  sequence="3" groups="learning_projects.lp_group_bachelor"/>
+
+        <menuitem id="menuitem_lp_project_bachelor"
+                  name="Проекты"
+                  action="action_nocontent_lp_project_management"
+                  parent="lp_menu"
+                  sequence="4" groups="learning_projects.lp_group_bachelor"/>
 
         <menuitem id="menuitem_lp_invitation_bachelor"
                   name="Откликнуться на проект"
                   action="action_nocontent_lp_invitation_bachelor"
                   parent="lp_menu"
-                  sequence="3" groups="learning_projects.lp_group_bachelor"/>
+                  sequence="5" groups="learning_projects.lp_group_bachelor"/>
 
 
     </data>
