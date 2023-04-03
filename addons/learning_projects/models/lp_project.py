@@ -33,7 +33,7 @@ class LpProject(models.Model):
     logo = fields.Image(string="Project logo")
 
     status = fields.Selection(PROJECT_STATUS, string="Статус", readonly=True, tracking=True, default="Unconfirmed")
-    author = fields.Many2one('res.partner', string="Автор", compute='compute_author', store=True, readonly=True, tracking=True)
+    author = fields.Many2one('res.partner', string="Автор", compute='compute_author',readonly=True, tracking=True)
 
     project_info = fields.Many2many('ir.attachment', 'lp_project_info_document_ir_attachments_rel',
                                     'lp_project_id', 'attachment_id', 'Project info', tracking=True, copy=True)

@@ -60,10 +60,18 @@ class HideMenuUser(models.Model):
             if rec.id == self.env.ref('base.user_admin').id:
                 rec.is_admin = True
 
+    def _get_is_master(self):
+        for rec in self:
+            group_external_ids = rec.get_group_external_ids()
+            rec.is_master = False
+            if 'Master' in group_external_ids:
+                rec.is_master = True
+
     hide_menu_ids = fields.Many2many('ir.ui.menu', string="Menu", store=True,
                                      help='Select menu items that needs to be '
                                           'hidden to this user ')
     is_admin = fields.Boolean(compute=_get_is_admin)
+    is_master = fields.Boolean(compute=_get_is_master)
 
     # @api.multi
     def get_group_external_ids(self):

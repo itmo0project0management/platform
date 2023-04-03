@@ -1,5 +1,7 @@
 import ast
 from odoo import models, fields, api, _
+from odoo.exceptions import ValidationError
+from odoo.tools import config as odoo_conf
 
 
 class Project(models.Model):
@@ -34,6 +36,8 @@ class Project(models.Model):
         return super(Project, self).create(vals)
 
     def write(self, vals):
+        if self.env.user.is_master and vals.get('stage_id'):
+            raise ValidationError("Это может сделать только преподаватель")
         return super(Project, self).write(vals)
 
     def action_view_tasks(self):
