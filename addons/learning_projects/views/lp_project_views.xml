@@ -46,7 +46,7 @@
                                     <tree>
                                         <field name="priority"/>
                                         <field name="resume"/>
-                                        <field name="number_grops"/>
+                                        <field name="number_groups"/>
                                         <field name="invited_status"/>
                                         <!-- todo hide -->
                                         <button name="action_confirm_invitation" string="Confirm project" type="object"
@@ -60,7 +60,7 @@
                                     <tree>
                                         <field name="name"/>
                                         <field name="academic_degree"/>
-                                        <field name="number_grops"/>
+                                        <field name="number_groups"/>
                                     </tree>
                                 </field>
                             </page>

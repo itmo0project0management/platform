@@ -31,7 +31,7 @@
                     <field name="priority" widget="handle"/>
                     <field name="project_id"/>
                     <field name="resume"/>
-                    <field name="number_grops"/>
+                    <field name="number_groups"/>
                     <field name="invited_status"/>
                 </tree>
             </field>

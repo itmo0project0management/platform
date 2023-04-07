@@ -25,7 +25,7 @@ class InvitationBachelor(models.Model):
     project_id = fields.Many2one('lp.project', string="Проект", required=True, domain=_domain_project_id)
     resume = fields.Many2one('lp.resume', string="Resume", required=True)  # compute='_compute_resume',
     resume_author = fields.Many2one(related='resume.author', string="Отправитель", store=True, readonly=True)
-    number_grops = fields.Char(related='resume_author.number_grops', string="Группа", readonly=True)
+    number_groups = fields.Char(related='resume_author.number_groups', string="Группа", readonly=True)
 
     invited_by = fields.Many2one('res.partner', string="Приглашён кем", readonly=True, tracking=True)
     invited_status = fields.Selection(STATUS, string="STATUS", default="waiting", readonly=True, tracking=True)
@@ -76,6 +76,8 @@ class InvitationBachelor(models.Model):
         lp_p.project.message_subscribe(partner_ids=[self.resume_author.id])
         new_current_value_users = lp_p.current_value_users + 1
         lp_p.write({'current_value_users': new_current_value_users})
+
+        self.resume_author.sudo().write({'in_project':True})
 
         self.write({
             'invited_status': 'invited',

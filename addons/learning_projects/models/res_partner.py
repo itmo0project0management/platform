@@ -10,12 +10,6 @@ ACADEMIC_DEGREE = [
     ("aspirant", 'Аспирант'),
 ]
 
-USER_ROLE = [
-    ("bachelor", 'Бакалавр'),
-    ("master", 'Магистр'),
-    ("lecturer", 'Преародаватель'),
-]
-
 FULL_FIO_TEMPLATE = "{last_name} {name} {surname}"
 
 
@@ -29,10 +23,9 @@ class Partner(models.Model):
     lastname = fields.Char(string='Lastname', tracking=True)
 
     academic_degree = fields.Selection(ACADEMIC_DEGREE, "Академическая степень")
-    participants_role = fields.Selection(USER_ROLE, "Роль Participants", readonly=True, tracking=True)
     in_project = fields.Boolean("В проекте", tracking=True)
     ear = fields.Char("Год", tracking=True)
-    number_grops = fields.Char("Группа", tracking=True)
+    number_groups = fields.Char("Группа", tracking=True)
     category_id = fields.Many2many('res.partner.category', string='Skill Stack', tracking=True)
 
     @api.model
