@@ -30,12 +30,11 @@
                             <field name="vat" placeholder="e.g. BE0477472701" attrs="{'readonly': [('parent_id','!=',False)]}"/>
                         </group>
                         <group>
-                            <field name="academic_degree"/>
-
                             <field name="user_ids" invisible="1"/>
-                            <field name="email" widget="email" context="{'gravatar_image': True}" attrs="{'required': [('user_ids','!=', [])]}"/>
-                            <field name="number_grops"/>
                             <field name="active_lang_count" invisible="1"/>
+                            <field name="academic_degree" attrs="{'invisible': ''}" />
+                            <field name="email" widget="email" context="{'gravatar_image': True}" attrs="{'required': [('user_ids','!=', [])]}"/>
+                            <field name="number_groups" groups="learning_projects.lp_group_master,learning_projects.lp_group_bachelor"/>
                             <field name="lang" attrs="{'invisible': [('active_lang_count', '&lt;=', 1)]}"/>
                         </group>
                     </group>

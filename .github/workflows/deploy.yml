@@ -37,8 +37,8 @@ jobs:
         username: ${{ secrets.SSH_USERNAME }}
         password: ${{ secrets.SSH_PASSWORD }}
         script: |
-          set -a
-          source ./envs/"${ENVIRONMENT}".env
+          #set -a
+          #source ./envs/${ENVIRONMENT}.env
           cd /home
           #gh repo clone itmo0project0management/platform
           cd platform/
@@ -47,4 +47,5 @@ jobs:
           #docker compose -f docker-compose.prod.yml pull
           #docker compose -f docker-compose.prod.yml down
           #docker compose -f docker-compose.prod.yml up -d
-          docker compose restart odoo16
+          #docker compose --env-file envs/prod.env up
+          docker compose restart odoo
