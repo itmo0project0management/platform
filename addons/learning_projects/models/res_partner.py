@@ -22,10 +22,10 @@ class Partner(models.Model):
     firstname = fields.Char(string='Firstname', tracking=True)
     lastname = fields.Char(string='Lastname', tracking=True)
 
-    academic_degree = fields.Selection(ACADEMIC_DEGREE, "Академическая степень")
-    in_project = fields.Boolean("В проекте", tracking=True)
+    academic_degree = fields.Selection(ACADEMIC_DEGREE, "Академическая степень", readonly=True)
+    in_project = fields.Boolean("В проекте", readonly=True, tracking=True)
     ear = fields.Char("Год", tracking=True)
-    number_groups = fields.Char("Группа", tracking=True)
+    number_groups = fields.Char("Группа", readonly=True ,tracking=True)
     category_id = fields.Many2many('res.partner.category', string='Skill Stack', tracking=True)
 
     @api.model
