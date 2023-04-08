@@ -46,6 +46,18 @@
                   parent="lp_menu"
                   sequence="2" groups="learning_projects.lp_group_lecturer,learning_projects.lp_group_master,learning_projects.lp_group_admin"/>
 
+        <!-- Lecturer and Master-->
+
+        <menuitem id="menuitem_configuration"
+                  name="Configuration"
+                  sequence="3"
+                  parent="lp_menu" groups="learning_projects.lp_group_admin"/>
+
+        <menuitem id="menuitem_lp_interest"
+                  name="Interest"
+                  parent="menuitem_configuration"
+                  action="lp_interest_act_window"/>
+
         <!-- Projects lp_group_bachelor -->
         <menuitem id="menuitem_lp_resume_bachelor"
                   name="Резюме"
