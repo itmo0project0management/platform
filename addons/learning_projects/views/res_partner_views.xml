@@ -36,6 +36,7 @@
                             <field name="email" widget="email" context="{'gravatar_image': True}" attrs="{'required': [('user_ids','!=', [])]}"/>
                             <field name="number_groups" groups="learning_projects.lp_group_master,learning_projects.lp_group_bachelor"/>
                             <field name="lang" attrs="{'invisible': [('active_lang_count', '&lt;=', 1)]}"/>
+                            <field name="in_project"/>
                         </group>
                     </group>
                 </xpath>
