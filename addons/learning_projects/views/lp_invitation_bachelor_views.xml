@@ -27,7 +27,7 @@
             <field name="name">Invitation bachelor</field>
             <field name="model">lp.invitation.bachelor</field>
             <field name="arch" type="xml">
-                <tree string="Project Details Tree" >
+                <tree string="Own Invitations Tree">
                     <field name="priority" widget="handle"/>
                     <field name="project_id"/>
                     <field name="resume"/>
@@ -42,6 +42,7 @@
             <field name="name">Invitation bachelor</field>
             <field name="res_model">lp.invitation.bachelor</field>
             <field name="view_mode">tree,form</field>
+            <field name="domain">[('create_uid','=',uid)]</field>
             <field name="help" type="html">
                 <p class="oe_view_nocontent_create">
                     You haven't created any invitation yet.

@@ -67,7 +67,7 @@
 
         <menuitem id="menuitem_lp_project_bachelor"
                   name="Проекты"
-                  action="action_nocontent_lp_project_management"
+                  action="action_nocontent_lp_project_management_bachelor"
                   parent="lp_menu"
                   sequence="4" groups="learning_projects.lp_group_bachelor"/>
 
