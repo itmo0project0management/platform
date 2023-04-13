@@ -86,9 +86,9 @@ class LpProject(models.Model):
         if not self.project:
             project = self.env['project.project'].create({
                 'name': self.name,
-                'message_partner_ids': self.author.id,
                 'stage_id': int(odoo_conf['project_stage_2_id'])
             })
+            project.write({'message_partner_ids': [(4, self.author.id)]})
 
             self.write({'project': project.id, 'status': 'OnApproval'})
         else:

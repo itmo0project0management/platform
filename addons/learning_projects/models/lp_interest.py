@@ -16,5 +16,5 @@ class Interest(models.Model):
     @api.constrains('name')
     def _check_duplicate_name(self):
         for record in self:
-            if self.search_count([('name', '=', record.name)]) > 0:
+            if self.search_count([('id', '!=', record.id),('name', '=', record.name)]) > 0:
                 raise ValidationError("Interest with this name already exists.")
