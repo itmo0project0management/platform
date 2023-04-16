@@ -47,9 +47,8 @@
                   sequence="2" groups="learning_projects.lp_group_lecturer,learning_projects.lp_group_master,learning_projects.lp_group_admin"/>
 
         <!-- Lecturer and Master-->
-
         <menuitem id="menuitem_configuration"
-                  name="Configuration"
+                  name="Конфигурация"
                   sequence="3"
                   parent="lp_menu" groups="learning_projects.lp_group_admin"/>
 
@@ -63,19 +62,19 @@
                   name="Резюме"
                   action="action_nocontent_lp_resume"
                   parent="lp_menu"
-                  sequence="3" groups="learning_projects.lp_group_bachelor"/>
+                  sequence="4" groups="learning_projects.lp_group_bachelor"/>
 
         <menuitem id="menuitem_lp_project_bachelor"
                   name="Проекты"
                   action="action_nocontent_lp_project_management_bachelor"
                   parent="lp_menu"
-                  sequence="4" groups="learning_projects.lp_group_bachelor"/>
+                  sequence="5" groups="learning_projects.lp_group_bachelor"/>
 
         <menuitem id="menuitem_lp_invitation_bachelor"
                   name="Откликнуться на проект"
                   action="action_nocontent_lp_invitation_bachelor"
                   parent="lp_menu"
-                  sequence="5" groups="learning_projects.lp_group_bachelor"/>
+                  sequence="6" groups="learning_projects.lp_group_bachelor"/>
 
 
     </data>
