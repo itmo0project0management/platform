@@ -4,7 +4,7 @@ from odoo.exceptions import ValidationError
 STATUS = [
     ("waiting", "В ожидании"),
     ("invited", "Приглашен"),
-    ("invited_for_other_priority", "Приглашен по дгугому приоритету"),
+    ("invited_for_other_priority", "Приглашен по другому приоритету"),
 ]
 
 
