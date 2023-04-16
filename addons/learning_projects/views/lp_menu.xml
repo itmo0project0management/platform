@@ -41,7 +41,7 @@
                   sequence="1" groups="learning_projects.lp_group_lecturer,learning_projects.lp_group_master,learning_projects.lp_group_admin"/>
 
         <menuitem id="menuitem_lp_invitation_lecturer_master"
-                  name="Отклики в проекты"
+                  name="Отклики бакалавров в проекты"
                   action="action_nocontent_lp_invitation_bachelor"
                   parent="lp_menu"
                   sequence="2" groups="learning_projects.lp_group_lecturer,learning_projects.lp_group_master,learning_projects.lp_group_admin"/>
