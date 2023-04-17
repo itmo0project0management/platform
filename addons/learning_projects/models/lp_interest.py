@@ -2,6 +2,7 @@ from odoo import models, fields, api
 from random import randint
 from odoo.exceptions import ValidationError
 
+
 class Interest(models.Model):
     _name = 'lp.interest'
     _description = "Область интересов пользователя"
@@ -13,8 +14,13 @@ class Interest(models.Model):
     name = fields.Char('Интересы', required=True, translate=True)
     color = fields.Integer(string='Color', default=_get_default_color)
 
+    @api.model
+    def create(self, vals):
+        vals.update({"name": vals.get("name").lower().capitalize()})
+        return super(Interest, self).create(vals)
+
     @api.constrains('name')
     def _check_duplicate_name(self):
         for record in self:
-            if self.search_count([('id', '!=', record.id),('name', '=', record.name)]) > 0:
+            if self.search_count([('id', '!=', record.id), ('name', '=', record.name)]) > 0:
                 raise ValidationError("Interest with this name already exists.")
