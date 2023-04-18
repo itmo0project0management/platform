@@ -2,10 +2,28 @@ from odoo import models, fields, api
 from odoo.exceptions import ValidationError
 
 STATUS = [
+    ("draft", "Черновик"),
     ("waiting", "В ожидании"),
     ("invited", "Приглашен"),
     ("invited_for_other_priority", "Приглашен по другому приоритету"),
 ]
+
+
+def create_notification(notification_type, title, message):
+    return {
+        'type': 'ir.actions.client',
+        'tag': 'display_notification',
+        'params': {
+            'title': title,
+            'message': message,
+            'sticky': False,
+            'type': notification_type,
+            'fadeout': 'slow',
+            'next': {
+                'type': 'ir.actions.act_window_close',
+            }
+        }
+    }
 
 
 class InvitationBachelor(models.Model):
@@ -13,6 +31,8 @@ class InvitationBachelor(models.Model):
     _description = 'Invitation Bachelor'
     _inherit = ['mail.thread']
     _order = 'priority asc'
+
+    user_id = fields.Many2one('res.users', string='User', default=lambda self: self.env.user)
 
     def _domain_project_id(self):
         invitation = self.env['lp.invitation.bachelor'].search([('create_uid', '=', self.env.uid)], limit=1)
@@ -22,16 +42,13 @@ class InvitationBachelor(models.Model):
 
     # bachelor
     priority = fields.Integer(string="Приоритет", default=1, size=2, required=True)
-    project_id = fields.Many2one('lp.project', string="Проект", required=True, domain=_domain_project_id)
+    project_id = fields.Many2one('lp.project', string="Проект", required=True)  # todo domain not dynamic change
     resume = fields.Many2one('lp.resume', string="Resume", required=True)  # compute='_compute_resume',
     resume_author = fields.Many2one(related='resume.author', string="Отправитель", store=True, readonly=True)
     number_groups = fields.Char(related='resume_author.number_groups', string="Группа", readonly=True)
 
     invited_by = fields.Many2one('res.partner', string="Приглашён кем", readonly=True, tracking=True)
-    invited_status = fields.Selection(STATUS, string="STATUS", default="waiting", readonly=True, tracking=True)
-
-    # Team
-    message_partner_ids = fields.Many2many(related='project_id.project.message_partner_ids', string="message_follower_ids", readonly=True, tracking=True)
+    invited_status = fields.Selection(STATUS, string="STATUS", default="draft", readonly=True, tracking=True)
 
     @api.model
     def create(self, vals):
@@ -54,6 +71,21 @@ class InvitationBachelor(models.Model):
         if priority != 1 and priority != 2:
             raise ValidationError('Priority 1 or 2 ' + str(priority))
 
+    @api.onchange('project_id')
+    def onchange_project_id(self):
+        domain = []
+        invitations = self.env['lp.invitation.bachelor'].search([('create_uid', '=', self.env.uid)])
+        for invitation in invitations:
+            if invitation is not None:
+                domain.append(('id', '!=', invitation.project_id.id))
+        return {'domain': {'project_id': domain}}
+
+    @api.constrains('user_id')
+    def _check_user(self):
+        for record in self:
+            if record.user_id and record.user_id != self.env.user:
+                raise ValidationError("Вы не можете изменять записи других пользователей")
+
     def change_priority(self, priority):
         invitation = self.env['lp.invitation.bachelor'].search([('create_uid', '=', self.env.uid)], limit=1)
         if invitation is not None:
@@ -63,9 +95,17 @@ class InvitationBachelor(models.Model):
                 invitation.write({'priority': 1})
 
     def validate_count_creations(self):
+        user = self.env.user
         invitations = self.env['lp.invitation.bachelor'].search([('create_uid', '=', self.env.uid)])
-        if len(invitations) > 1:
+        if user.has_group('learning_projects.lp_group_bachelor') and len(invitations) > 1:
             raise ValidationError("Бакалавр может создать только 2 приглашения")
+
+    @api.constrains('invited_status', 'project_id', 'resume')
+    def _check_status(self):
+        for record in self:
+            befo_invitation = self.env['lp.invitation.bachelor'].search([('id', '=', record.id)], limit=1)
+            if record.user_id == self.env.user and record.invited_status in ['invited', 'invited_for_other_priority'] and befo_invitation.invited_status == 'waiting':
+                raise ValidationError("Вы не можете изменять или удалять свои записи со статусом 'ожидание'")
 
     def action_confirm_invitation(self):
         resume_author = self.resume_author.id
@@ -77,11 +117,10 @@ class InvitationBachelor(models.Model):
         new_current_value_users = lp_p.current_value_users + 1
         lp_p.write({'current_value_users': new_current_value_users})
 
-        self.resume_author.sudo().write({'in_project':True})
+        self.resume_author.sudo().write({'in_project': True})
 
         self.write({
             'invited_status': 'invited',
-            'message_partner_ids': [(4, resume_author)],
             'invited_by': self.env.uid,
         })
 
@@ -89,6 +128,31 @@ class InvitationBachelor(models.Model):
         if invitation is not None:
             invitation.write({'invited_status': 'invited_for_other_priority'})
 
+    def action_send_invitation(self):
+        for invitation in self:
+            show_warning = False
+            if invitation.invited_status == "draft":
+                invitation.sudo().write({'invited_status': 'waiting'})
+            else:
+                show_warning = True
+
+            notification_type = 'warning' if show_warning else 'success'
+            title = 'Ошибка' if show_warning else 'Успешно'
+            message = 'Вы не можите это сделать' if show_warning else 'Приглашение отправленно'
+            return create_notification(notification_type, title, message)
+
+    def action_draft_invitation(self):
+        for invitation in self:
+            show_warning = False
+            if invitation.invited_status == "waiting":
+                invitation.sudo().write({'invited_status': 'draft'})
+            else:
+                show_warning = True
+
+            notification_type = 'warning' if show_warning else 'success'
+            title = 'Ошибка' if show_warning else 'Успешно'
+            message = 'Вы не можите это сделать' if show_warning else 'Приглашение стало черновиком'
+            return create_notification(notification_type, title, message)
 
     def name_get(self):
         result = []

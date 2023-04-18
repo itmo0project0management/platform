@@ -7,9 +7,16 @@
             <field name="model">lp.invitation.bachelor</field>
             <field name="arch" type="xml">
                 <form string="Invitation bachelor">
+                    <header>
+                        <field name="invited_status" invisible="True"/>
+                        <button name="action_send_invitation" string="Отправить" type="object" attrs="{'invisible': [('invited_status', 'not in', 'draft')]}"
+                                groups="learning_projects.lp_group_bachelor"/>
+                        <button name="action_draft_invitation" string="Сделать черновиком" type="object" attrs="{'invisible': [('invited_status', 'not in', 'waiting')]}"
+                                groups="learning_projects.lp_group_bachelor"/>
+                    </header>
                     <sheet>
                         <group string="Информация об студенте">
-                            <field name="priority" />
+                            <field name="priority"/>
                             <field name="project_id"/>
                             <field name="resume"/>
                             <field name="resume_author"/>
@@ -42,7 +49,7 @@
             <field name="name">Invitation bachelor</field>
             <field name="res_model">lp.invitation.bachelor</field>
             <field name="view_mode">tree,form</field>
-            <field name="domain">[('create_uid','=',uid)]</field>
+            <field name="domain">[('create_uid', '=', uid)]</field>
             <field name="help" type="html">
                 <p class="oe_view_nocontent_create">
                     You haven't created any invitation yet.

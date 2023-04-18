@@ -15,7 +15,7 @@
                         <button name="confirm_project" string="Confirm project" type="object"
                                 attrs="{'invisible': [('status', '!=', 'OnApproval')]}" groups="learning_projects.lp_group_lecturer, learning_projects.lp_group_admin "/>
                         <button name="action_view_tasks" string="Open Канбан" type="object" invisible="True"
-                         context="{'id': project}"/>
+                                context="{'id': project}"/>
                     </header>
                     <sheet>
                         <field name="logo" widget="image" class="oe_avatar"/>
@@ -29,7 +29,6 @@
                             <field name="short_description"/>
                             <field name="description"/>
                             <field name="author"/>
-<!--                        <field name="project_info" widget="many2many_binary"/>-->
                         </group>
                         <group string="Канюан доска" width="50">
                             <field name="project"/>
@@ -52,8 +51,8 @@
                                         <field name="invited_status"/>
                                         <!-- todo hide -->
                                         <button name="action_confirm_invitation" string="Confirm project" type="object"
-                                                                        attrs="{'invisible': ['|',('invited_status', '=', 'invited'), ('invited_status',  '=', 'invited_for_other_priority')]}"
-                                                                        groups="learning_projects.lp_group_master, learning_projects.lp_group_admin "/>
+                                                attrs="{'invisible': ['|',('invited_status', '=', 'invited'), ('invited_status',  '=', 'invited_for_other_priority')]}"
+                                                groups="learning_projects.lp_group_master, learning_projects.lp_group_admin "/>
                                     </tree>
                                 </field>
                             </page>
@@ -80,9 +79,9 @@
             <field name="name">Project Management</field>
             <field name="model">lp.project</field>
             <field name="arch" type="xml">
-                <tree string="Project Details Tree" >
+                <tree string="Project Details Tree">
                     <field name="name"/>
-                    <field name="tag_ids" widget="many2many_tags" options="{'color_field': 'color', 'no_create_edit': True}" />
+                    <field name="tag_ids" widget="many2many_tags" options="{'color_field': 'color', 'no_create_edit': True}"/>
                     <field name="status"/>
                 </tree>
             </field>
@@ -99,7 +98,7 @@
                     <field name="short_description"/>
                     <field name="author" widget="contact"/>
                     <field name="description"/>
-                    <field name="tag_ids" widget="many2many_tags" options="{'color_field': 'color', 'no_create_edit': True}" />
+                    <field name="tag_ids" widget="many2many_tags" options="{'color_field': 'color', 'no_create_edit': True}"/>
                     <templates>
                         <t t-name="kanban-box">
                             <div t-attf-class="oe_kanban_global_click">
@@ -118,7 +117,7 @@
                                         Description: <t t-esc="record.short_description.value"/>
                                     </div>
                                     <div t-if="record.tag_ids.value">
-                                        <field name="tag_ids" widget="many2many_tags" options="{'color_field': 'color', 'no_create_edit': True}" />
+                                        <field name="tag_ids" widget="many2many_tags" options="{'color_field': 'color', 'no_create_edit': True}"/>
                                     </div>
                                 </div>
                             </div>

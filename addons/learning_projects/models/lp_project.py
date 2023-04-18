@@ -33,7 +33,7 @@ class LpProject(models.Model):
     logo = fields.Image(string="Project logo")
 
     status = fields.Selection(PROJECT_STATUS, string="Статус", readonly=True, tracking=True, default="Unconfirmed")
-    author = fields.Many2one('res.partner', string="Автор", compute='compute_author',readonly=True, tracking=True)
+    author = fields.Many2one('res.partner', string="Автор", compute='compute_author', readonly=True, tracking=True)
 
     project_info = fields.Many2many('ir.attachment', 'lp_project_info_document_ir_attachments_rel',
                                     'lp_project_id', 'attachment_id', 'Project info', tracking=True, copy=True)
@@ -59,7 +59,7 @@ class LpProject(models.Model):
     is_all_invited = fields.Boolean('Is All invited', compute='_compute_is_all_invited', store=True, readonly=True, tracking=True)
 
     # Invitation Bachelor
-    invitation_bachelor_ids = fields.One2many('lp.invitation.bachelor', 'project_id', string='Project info', readonly=True, tracking=True)
+    invitation_bachelor_ids = fields.One2many('lp.invitation.bachelor', 'project_id', domain=[('invited_status', '!=', 'draft')], string='Project info', readonly=True, tracking=True)
 
     @api.model
     def create(self, vals):

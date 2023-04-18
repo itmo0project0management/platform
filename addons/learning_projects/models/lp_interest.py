@@ -12,7 +12,7 @@ class Interest(models.Model):
         return randint(1, 11)
 
     name = fields.Char('Интересы', required=True, translate=True)
-    color = fields.Integer(string='Color', default=_get_default_color)
+    color = fields.Integer(string='Цвет', default=_get_default_color)
 
     @api.model
     def create(self, vals):
