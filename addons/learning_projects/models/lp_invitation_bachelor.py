@@ -34,15 +34,9 @@ class InvitationBachelor(models.Model):
 
     user_id = fields.Many2one('res.users', string='User', default=lambda self: self.env.user)
 
-    def _domain_project_id(self):
-        invitation = self.env['lp.invitation.bachelor'].search([('create_uid', '=', self.env.uid)], limit=1)
-        if invitation is None:
-            return {}
-        return [('id', '!=', invitation.project_id.id)]
-
     # bachelor
     priority = fields.Integer(string="Приоритет", default=1, size=2, required=True)
-    project_id = fields.Many2one('lp.project', string="Проект", required=True)  # todo domain not dynamic change
+    project_id = fields.Many2one('lp.project', string="Проект", required=True)
     resume = fields.Many2one('lp.resume', string="Resume", required=True)  # compute='_compute_resume',
     resume_author = fields.Many2one(related='resume.author', string="Отправитель", store=True, readonly=True)
     number_groups = fields.Char(related='resume_author.number_groups', string="Группа", readonly=True)
