@@ -16,7 +16,7 @@ class Resume(models.Model):
     name = fields.Char(related='author.name', string="ФИО", tracking=True, readonly=True)
     group = fields.Char(related='author.number_groups', string="Группа", tracking=True, readonly=True)
     short_description = fields.Text(string="О себе", tracking=True)
-    skills = fields.Many2many('res.partner.category', string='Skills', tracking=True)
+    skills = fields.Many2many('res.partner.category', string='Навыки', tracking=True)
     areas_of_interest = fields.Many2many('lp.interest', string='Области интересов', tracking=True)
 
     @api.depends('author')
