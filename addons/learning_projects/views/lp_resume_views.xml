@@ -14,8 +14,8 @@
                         </group>
                         <group string="Навыки и опыт студента">
                             <field name="short_description"/>
-                            <field name="skills" widget="many2many_tags" placeholder="С++..."/>
-                            <field name="areas_of_interest" widget="many2many_tags" placeholder="Медицина..."/>
+                            <field name="skills" widget="many2many_tags" options="{'color_field': 'color'}" placeholder="С++..."/>
+                            <field name="areas_of_interest" widget="many2many_tags" options="{'color_field': 'color'}" placeholder="Медицина..."/>
                         </group>
                     </sheet>
                     <div class="oe_chatter">
@@ -32,10 +32,8 @@
             <field name="arch" type="xml">
                 <tree string="Project Details Tree">
                     <field name="author"/>
-                    <field name="skills" widget="many2many_tags"
-                           options="{'color_field': 'color', 'no_create_edit': True}" placeholder="С++..."/>
-                    <field name="areas_of_interest" widget="many2many_tags"
-                           options="{'color_field': 'color', 'no_create_edit': True}" placeholder="Медицина..."/>
+                    <field name="skills" widget="many2many_tags" options="{'color_field': 'color'}" placeholder="С++..."/>
+                    <field name="areas_of_interest" widget="many2many_tags" options="{'color_field': 'color'}" placeholder="Медицина..."/>
                 </tree>
             </field>
         </record>
