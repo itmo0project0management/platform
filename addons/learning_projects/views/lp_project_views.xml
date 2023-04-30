@@ -14,23 +14,23 @@
                                 attrs="{'invisible': [('status', '!=', 'Unconfirmed')]}" groups="learning_projects.lp_group_master, learning_projects.lp_group_admin "/>
                         <button name="confirm_project" string="Confirm project" type="object"
                                 attrs="{'invisible': [('status', '!=', 'OnApproval')]}" groups="learning_projects.lp_group_lecturer, learning_projects.lp_group_admin "/>
-                        <button name="action_view_tasks" string="Open Канбан" type="object" invisible="True"
+                        <button name="action_view_tasks" string="Открыть канбан-доску" type="object" invisible="True"
                                 context="{'id': project}"/>
                     </header>
                     <sheet>
                         <field name="logo" widget="image" class="oe_avatar"/>
                         <div class="oe_title">
-                            <label for="name" string="Name"/>
+                            <label for="name" string="Название"/>
                             <h1>
                                 <field name="name" class="o_project_name oe_inline"/>
                             </h1>
                         </div>
-                        <group string="Об проекте" width="50">
+                        <group string="Информация по проекту" width="50">
                             <field name="short_description"/>
                             <field name="description"/>
                             <field name="author"/>
                         </group>
-                        <group string="Канюан доска" width="50">
+                        <group string="Канбан доска" width="50">
                             <field name="project"/>
                             <field name="tag_ids" widget="many2many_tags" options="{'color_field': 'color', 'no_create_edit': True}"/>
                             <field name="stage_id"/>
@@ -42,7 +42,7 @@
                             <field name="status"/>
                         </group>
                         <notebook>
-                            <page string="Invitation Bachelor">
+                            <page string="Запросы на участие в проекте">
                                 <field name="invitation_bachelor_ids" default_order="priority asc" domain="[('create_uid','=',1)]">
                                     <tree>
                                         <field name="priority"/>
@@ -56,7 +56,7 @@
                                     </tree>
                                 </field>
                             </page>
-                            <page string="Team" groups="learning_projects.lp_group_master">
+                            <page string="Команда" groups="learning_projects.lp_group_master">
                                 <field name="message_partner_ids">
                                     <tree>
                                         <field name="name"/>

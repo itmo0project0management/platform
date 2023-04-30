@@ -37,12 +37,12 @@ class InvitationBachelor(models.Model):
     # bachelor
     priority = fields.Integer(string="Приоритет", default=1, size=2, required=True)
     project_id = fields.Many2one('lp.project', string="Проект", required=True)
-    resume = fields.Many2one('lp.resume', string="Resume", required=True)  # compute='_compute_resume',
+    resume = fields.Many2one('lp.resume', string="Резюме", required=True)  # compute='_compute_resume',
     resume_author = fields.Many2one(related='resume.author', string="Отправитель", store=True, readonly=True)
     number_groups = fields.Char(related='resume_author.number_groups', string="Группа", readonly=True)
 
     invited_by = fields.Many2one('res.partner', string="Приглашён кем", readonly=True, tracking=True)
-    invited_status = fields.Selection(STATUS, string="STATUS", default="draft", readonly=True, tracking=True)
+    invited_status = fields.Selection(STATUS, string="Статус", default="draft", readonly=True, tracking=True)
 
     @api.model
     def create(self, vals):

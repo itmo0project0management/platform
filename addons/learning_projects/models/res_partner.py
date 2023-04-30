@@ -6,7 +6,7 @@ _logger = logging.getLogger(__name__)
 
 ACADEMIC_DEGREE = [
     ("bachelor", 'Бакалавр'),
-    ("master", 'Магистр'),
+    ("master", 'Магистрант'),
     ("aspirant", 'Аспирант'),
 ]
 
@@ -18,14 +18,14 @@ class Partner(models.Model):
     _description = "Partner"
     _order = 'write_date desc'
 
-    name = fields.Char(tracking=True)
+    name = fields.Char(string='ФИО', tracking=True)
     firstname = fields.Char(string='Firstname', tracking=True)
     lastname = fields.Char(string='Lastname', tracking=True)
 
     academic_degree = fields.Selection(ACADEMIC_DEGREE, "Академическая степень", readonly=True)
     in_project = fields.Boolean("В проекте", readonly=True, tracking=True)
     ear = fields.Char("Год", tracking=True)
-    number_groups = fields.Char("Группа", readonly=True ,tracking=True)
+    number_groups = fields.Char("Группа", readonly=True, tracking=True)
     category_id = fields.Many2many('res.partner.category', string='Skill Stack', tracking=True)
 
     @api.model
