@@ -14,8 +14,8 @@
                         </group>
                         <group string="Навыки и опыт студента">
                             <field name="short_description"/>
-                            <field name="skills" widget="many2many_tags" options="{'color_field': 'color', 'no_create_edit': True}" placeholder="С++..."/>
-                            <field name="areas_of_interest" widget="many2many_tags" options="{'color_field': 'color', 'no_create_edit': True}" placeholder="Медицина..."/>
+                            <field name="skills" widget="many2many_tags" placeholder="С++..."/>
+                            <field name="areas_of_interest" widget="many2many_tags" placeholder="Медицина..."/>
                         </group>
                     </sheet>
                     <div class="oe_chatter">
@@ -30,10 +30,12 @@
             <field name="name">Resume</field>
             <field name="model">lp.resume</field>
             <field name="arch" type="xml">
-                <tree string="Project Details Tree" >
+                <tree string="Project Details Tree">
                     <field name="author"/>
-                    <field name="skills" widget="many2many_tags" options="{'color_field': 'color', 'no_create_edit': True}" placeholder="С++..."/>
-                    <field name="areas_of_interest" widget="many2many_tags" options="{'color_field': 'color', 'no_create_edit': True}" placeholder="Медицина..."/>
+                    <field name="skills" widget="many2many_tags"
+                           options="{'color_field': 'color', 'no_create_edit': True}" placeholder="С++..."/>
+                    <field name="areas_of_interest" widget="many2many_tags"
+                           options="{'color_field': 'color', 'no_create_edit': True}" placeholder="Медицина..."/>
                 </tree>
             </field>
         </record>
@@ -56,7 +58,7 @@
                                 <!--
                                 <div class="o_kanban_image">
                                     <field name="logo" widget="image"/> -->
-                                    <!--   <img t-att-src="('project', 'logo', record.logo)" alt="Logo"/> class="o_image_128_max"  class="oe_avatar"-->
+                                <!--   <img t-att-src="('project', 'logo', record.logo)" alt="Logo"/> class="o_image_128_max"  class="oe_avatar"-->
                                 <!--
                                 </div>
                                 -->
@@ -71,7 +73,8 @@
                                         Description: <t t-esc="record.short_description.value"/>
                                     </div>
                                     <div t-if="record.skills.value">
-                                        <field name="skills" widget="many2many_tags" options="{'color_field': 'color', 'no_create_edit': False}" />
+                                        <field name="skills" widget="many2many_tags"
+                                               options="{'color_field': 'color', 'no_create_edit': False}"/>
                                     </div>
                                 </div>
 
