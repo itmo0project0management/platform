@@ -6,9 +6,9 @@
             <field name="name">Resume Details</field>
             <field name="model">lp.resume</field>
             <field name="arch" type="xml">
-                <form string="Resume">
+                <form string="Резюме">
                     <sheet>
-                        <group string="Информация об студенте">
+                        <group string="Информация о студенте">
                             <field name="author"/>
                             <field name="group"/>
                         </group>

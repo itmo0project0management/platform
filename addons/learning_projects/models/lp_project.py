@@ -28,8 +28,8 @@ class LpProject(models.Model):
 
     # Project info
     name = fields.Char(string="Название проекта", tracking=True, required=True)
-    short_description = fields.Text(string="Краткое описание (html или текст)", tracking=True)
-    description = fields.Text(string="Необходимые участники команды.(Пример 2 бэкендера, 2 Фронтендера)", tracking=True)
+    short_description = fields.Text(string="Описание проекта", tracking=True)
+    description = fields.Text(string="Необходимые участники команды (Пример: backend, 2 frontend, ML)", tracking=True)
     logo = fields.Image(string="Project logo")
 
     status = fields.Selection(PROJECT_STATUS, string="Статус", readonly=True, tracking=True, default="Unconfirmed")
@@ -39,17 +39,17 @@ class LpProject(models.Model):
                                     'lp_project_id', 'attachment_id', 'Project info', tracking=True, copy=True)
 
     # Accept Project info by lecturer
-    confirmed_id = fields.Many2one('res.partner', string="Подтверждёно кем", readonly=True, tracking=True)
+    confirmed_id = fields.Many2one('res.partner', string="Подтверждено", readonly=True, tracking=True)
 
     # project
     project = fields.Many2one('project.project', string="Канбан", readonly=True, tracking=True)
-    stage_id = fields.Many2one(related='project.stage_id', string="stage_id", readonly=True, tracking=True)
-    tag_ids = fields.Many2many(related='project.tag_ids', string="Skill Stack", tracking=True)
+    stage_id = fields.Many2one(related='project.stage_id', string="Статус", readonly=True, tracking=True)
+    tag_ids = fields.Many2many(related='project.tag_ids', string="Навыки", tracking=True)
 
     # Team
     message_partner_ids = fields.Many2many(related='project.message_partner_ids', string="message_follower_ids", readonly=True, tracking=True)
     max_col_users = fields.Integer(string="Максимальное количество учасников", default=5, readonly=True, tracking=True)
-    current_value_users = fields.Integer(string="Текущие количество учасников", default=0, readonly=True, tracking=True)
+    current_value_users = fields.Integer(string="Текущее количество учасников", default=0, readonly=True, tracking=True)
 
     @api.depends('max_col_users', 'current_value_users')
     def _compute_is_all_invited(self):
