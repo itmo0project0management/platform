@@ -71,7 +71,7 @@
                                         Description: <t t-esc="record.short_description.value"/>
                                     </div>
                                     <div t-if="record.skills.value">
-                                        <field name="skills" widget="many2many_tags" options="{'color_field': 'color', 'no_create_edit': True}" />
+                                        <field name="skills" widget="many2many_tags" options="{'color_field': 'color', 'no_create_edit': False}" />
                                     </div>
                                 </div>
 
