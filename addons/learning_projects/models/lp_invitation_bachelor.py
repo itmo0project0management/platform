@@ -35,7 +35,7 @@ class InvitationBachelor(models.Model):
     user_id = fields.Many2one('res.users', string='User', default=lambda self: self.env.user)
 
     # bachelor
-    priority = fields.Integer(string="Приоритет", default=1, size=2, required=True)
+    priority = fields.Integer(string="Приоритет", default=1, required=True)
     project_id = fields.Many2one('lp.project', string="Проект", required=True)
     resume = fields.Many2one('lp.resume', string="Резюме", required=True)  # compute='_compute_resume',
     resume_author = fields.Many2one(related='resume.author', string="Отправитель", store=True, readonly=True)
