@@ -65,11 +65,12 @@
                                         <field name="display_name"/>
                                     </strong>
                                     <div t-if="record.author.value">
-                                        Author: <t t-esc="record.author.value"/>
+                                        Автор: <t t-esc="record.author.value"/>
                                     </div>
-                                    <div t-if="record.short_description.value">
-                                        Description: <t t-esc="record.short_description.value"/>
+                                     <div class="resume_description" t-if="record.short_description.value" >
+                                        О себе: <t t-esc="record.short_description.value"/>
                                     </div>
+                                    <style>.resume_description{height:40px;width: 300px;white-space: pre-line;overflow-y: hidden;text-overflow: ellipsis;}</style>
                                     <div t-if="record.skills.value">
                                         <field name="skills" widget="many2many_tags"
                                                options="{'color_field': 'color', 'no_create_edit': False}"/>
