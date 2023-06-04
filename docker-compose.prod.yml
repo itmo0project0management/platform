@@ -8,7 +8,6 @@ services:
     volumes:
       - ./data/odoo:/var/lib/odoo:Z
       - ./config/odoo.${ENVIRONMENT}.conf:/etc/odoo/odoo.conf
-      - ./addons:/mnt/extra-addons
     command: -u rent_management -d odoo
 
   postgres:
