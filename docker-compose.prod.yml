@@ -26,7 +26,7 @@ services:
       - "80:8069"
     volumes:
       - ./data/odoo:/var/lib/odoo
-        - ./config/odoo.conf:/etc/odoo/odoo.conf
+        - ./config/odoo.prod.conf:/etc/odoo/odoo.conf
         - ./addons:/mnt/extra-addons
 
   postgres:
