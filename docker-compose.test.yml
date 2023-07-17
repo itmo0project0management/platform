@@ -19,7 +19,7 @@ services:
 
   odoo:
     restart: always
-    container_name: odoo
+    container_name: ghcr.io/itmo0project0management/odoo:16.0
     image: odoo:16.0
     command: -u learning_projects -d odoo
     ports:
@@ -29,17 +29,17 @@ services:
       - ./config/odoo.conf:/etc/odoo/odoo.conf
       - ./addons:/mnt/extra-addons
 
-postgres:
-    restart: always
-    container_name: postgres
-    image: postgres:13
-    environment:
-      POSTGRES_DB: "postgres"
-      POSTGRES_PASSWORD: "WLgxqy4gy94HrJB6LSma"
-      POSTGRES_USER: "odoo"
-      PGDATA: "/var/lib/postgresql/data/pgdata"
-    volumes:
-      - ./data/pgdata:/var/lib/postgresql/data/pgdata
+  postgres:
+      restart: always
+      container_name: postgres
+      image: postgres:13
+      environment:
+        POSTGRES_DB: "postgres"
+        POSTGRES_PASSWORD: "WLgxqy4gy94HrJB6LSma"
+        POSTGRES_USER: "odoo"
+        PGDATA: "/var/lib/postgresql/data/pgdata"
+      volumes:
+        - ./data/pgdata:/var/lib/postgresql/data/pgdata
 
   pgadmin:
     restart: always
