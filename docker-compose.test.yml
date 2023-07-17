@@ -19,8 +19,8 @@ services:
 
   odoo:
     restart: always
-    container_name: ghcr.io/itmo0project0management/odoo:16.0
-    image: odoo:16.0
+    container_name: odoo
+    image: ghcr.io/itmo0project0management/odoo:16.0
     command: -u learning_projects -d odoo
     ports:
       - "80:8069"
