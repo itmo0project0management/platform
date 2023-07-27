@@ -6,7 +6,7 @@ services:
     container_name: odoo16
     image: ghcr.io/itmo0project0management/odoo:16.0
     ports:
-      - "8080:8069"
+      - "80:8069"
     networks:
       - default
     command: -u learning_projects -d odoo
